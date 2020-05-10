@@ -1,0 +1,50 @@
+import 'package:audioplayers/audio_cache.dart';
+import 'package:flutter/material.dart';
+//import 'package:audioplayers/audioplayers.dart';
+
+void main() => runApp(XylophoneApp());
+
+class XylophoneApp extends StatelessWidget {
+  final player = AudioCache();
+  void playfun(int i) {
+    player.play('note$i.wav');
+  }
+
+  Expanded buildkey({int soundnumber, Color colorname}) {
+    return Expanded(
+      child: FlatButton(
+        child: Text(
+          'tone$soundnumber',
+        ),
+        color: colorname,
+        onPressed: () {
+          playfun(soundnumber);
+        },
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        backgroundColor: Colors.black,
+        body: SafeArea(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              buildkey(soundnumber: 1, colorname: Colors.red),
+              buildkey(soundnumber: 2, colorname: Colors.green),
+              buildkey(soundnumber: 3, colorname: Colors.yellow),
+              buildkey(soundnumber: 4, colorname: Colors.purple),
+              buildkey(soundnumber: 5, colorname: Colors.orange),
+              buildkey(soundnumber: 6, colorname: Colors.blue),
+              buildkey(soundnumber: 7, colorname: Colors.pink),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
